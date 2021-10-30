@@ -4,6 +4,7 @@
 #include <string>
 #include <vector>
 #include <cstring>
+#include <cmath>
 #include "mini-gmp.h"
 #include "mini-gmp.c"
 
@@ -37,16 +38,6 @@ struct fourvec
     vector<int> d;
 };
 
-long pangkat(long x,long y)
-{
-    long res;
-    res=1;
-    for(int i = 0; i<y;i++){
-        res = res*x;
-    }
-    return res;
-}
-
 void printvec(vector<int> v)
 {
     copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
@@ -70,11 +61,11 @@ vector<int> dectobin(long m)
 
 long bintodec(vector<int> m)
 {
-    long power,decimal=0;
+    long power, decimal=0;
         for(int i = m.size()-1;i>=0;i--)
          {
 		    power = m.size()-i-1;
-		    decimal += m[i]*pangkat(2,power);
+		    decimal += m[i]*pow(2, power);
          }
     return decimal;
 }
@@ -190,7 +181,7 @@ fourlong krstu(long k, fourlong rstu,long n)
 long dekrip( vector <int> c)
 {
     vector <int> l1,l2;
-    long res = 0,temp;
+    long result   = 0,temp;
     if(c.size()%2==0)
     {
         temp = c.size()/2;
@@ -210,9 +201,9 @@ long dekrip( vector <int> c)
         }
     }
     if(k==temp){
-        res = bintodec(l1);
+        result   = bintodec(l1);
     }
-    return res;
+    return result ; 
 }
 
 long msgbaru(long m){
