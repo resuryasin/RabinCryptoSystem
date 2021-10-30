@@ -2,43 +2,15 @@
 #include <algorithm>
 #include <iterator>
 #include <string>
-#include <vector>
 #include <cstring>
 #include <cmath>
 #include "mini-gmp.h"
 #include "mini-gmp.c"
+#include "variables.cpp"
 
 using namespace std;
 
-struct twolong
-{
-    long x;
-    long y;
-};
-
-struct fourlong
-{
-    long w;
-    long x;
-    long y;
-    long z;
-};
-
-struct twovec
-{
-    vector<int> a;
-    vector<int> b;
-};
-
-struct fourvec
-{
-    vector<int> a;
-    vector<int> b;
-    vector<int> c;
-    vector<int> d;
-};
-
-void printvec(vector<int> v)
+void print_vec(vector<int> v)
 {
     copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
 }
@@ -88,7 +60,7 @@ long kongruen(long m, long n)
     return k;
 }
 
-long enkripsi(long m, long n)
+long encrypt(long m, long n)
 {
     long c;
     mpz_t tmp;
@@ -175,7 +147,7 @@ fourlong krstu(long k, fourlong rstu,long n)
     return l;
 }
 
-long dekrip( vector <int> c)
+long decrypt( vector <int> c)
 {
     vector <int> l1,l2;
     long result   = 0,temp;
@@ -203,13 +175,13 @@ long dekrip( vector <int> c)
     return result ; 
 }
 
-long msgbaru(long m){
-    long mbaru;
-    vector<int> mbin,mbin2;
-    mbin = dec2bin(m);
-    mbin2 = doublebin(mbin);
-    mbaru = bin2dec(mbin2);
-    return mbaru;
+long new_message(long m){
+    long new_m;
+    vector<int> m_bin, m_double_bin;
+    m_bin = dec2bin(m);
+    m_double_bin = doublebin(m_bin);
+    new_m = bin2dec(m_double_bin);
+    return new_m;
 }
 
 int pdekripsi(long c,long p, long q, long k,long n)
@@ -228,10 +200,10 @@ int pdekripsi(long c,long p, long q, long k,long n)
     cbin.c = dec2bin(nrstu.y);
     cbin.d = dec2bin(nrstu.z);
 
-    cm.w = dekrip(cbin.a);
-    cm.x = dekrip(cbin.b);
-    cm.y = dekrip(cbin.c);
-    cm.z = dekrip(cbin.d);
+    cm.w = decrypt(cbin.a);
+    cm.x = decrypt(cbin.b);
+    cm.y = decrypt(cbin.c);
+    cm.z = decrypt(cbin.d);
     if(cm.w!=0){
         cma = cm.w;
     }else if(cm.x!=0){
@@ -265,7 +237,7 @@ int main(){
     }
     for(int i = 0; i < len; i++)
     {
-        vmsgbaru.push_back(msgbaru(msg[i]));
+        vmsgbaru.push_back(new_message(msg[i]));
     }
     for(int i = 0; i < len; i++)
     {
@@ -273,7 +245,7 @@ int main(){
     }
     for(int i = 0; i < len; i++)
     {
-        vc.push_back(enkripsi(vmsgbaru[i],n));
+        vc.push_back(encrypt(vmsgbaru[i],n));
     }
     for(int i = 0; i < len; i++)
     {
@@ -281,17 +253,17 @@ int main(){
     }
 
     cout<<"Pesan Asli : "<<msg<<endl<<"Kunci Publik: "<<n<<endl<<endl<<"Pesan Asli (ASCII): ";
-    printvec(vmsg);
+    print_vec(vmsg);
     cout<<endl<<"Pesan Diduplikasi: ";
-    printvec(vmsgbaru);
+    print_vec(vmsgbaru);
     cout<<endl<<"Pesan Dienkripsi: ";
-    printvec(vc);
+    print_vec(vc);
     cout<<endl<<"Chiper Text: ";
     copy(vc.begin(), vc.end(), ostream_iterator<char>(cout, ""));
     cout<<endl<<endl<<"Kongruen: ";
-    printvec(vk);
+    print_vec(vk);
     cout<<endl<<"Pesan Didekripsi: ";
-    printvec(vpt);
+    print_vec(vpt);
     cout<<endl<<"Plain Text: ";
     copy(vpt.begin(), vpt.end(), ostream_iterator<char>(cout, ""));
 }
