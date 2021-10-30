@@ -43,7 +43,7 @@ void printvec(vector<int> v)
     copy(v.begin(), v.end(), ostream_iterator<int>(cout, " "));
 }
 
-vector<int> dectobin(long m)
+vector<int> dec2bin(long m)
 {
     vector<int>l;
     long temp;
@@ -53,13 +53,10 @@ vector<int> dectobin(long m)
         	l.insert(l.begin(),temp);
         	m = m/2;
          }
-//         while(l.size()%8!=0){
-//            l.insert(l.begin(),0);
-//         }
     return l;
 }
 
-long bintodec(vector<int> m)
+long bin2dec(vector<int> m)
 {
     long power, decimal=0;
         for(int i = m.size()-1;i>=0;i--)
@@ -201,7 +198,7 @@ long dekrip( vector <int> c)
         }
     }
     if(k==temp){
-        result   = bintodec(l1);
+        result   = bin2dec(l1);
     }
     return result ; 
 }
@@ -209,9 +206,9 @@ long dekrip( vector <int> c)
 long msgbaru(long m){
     long mbaru;
     vector<int> mbin,mbin2;
-    mbin = dectobin(m);
+    mbin = dec2bin(m);
     mbin2 = doublebin(mbin);
-    mbaru = bintodec(mbin2);
+    mbaru = bin2dec(mbin2);
     return mbaru;
 }
 
@@ -226,10 +223,10 @@ int pdekripsi(long c,long p, long q, long k,long n)
     mpq = quampq(c,p,q);
     rstu = crt(eu,mpq,p,q,n);
     nrstu = krstu(k,rstu,n);
-    cbin.a = dectobin(nrstu.w);
-    cbin.b = dectobin(nrstu.x);
-    cbin.c = dectobin(nrstu.y);
-    cbin.d = dectobin(nrstu.z);
+    cbin.a = dec2bin(nrstu.w);
+    cbin.b = dec2bin(nrstu.x);
+    cbin.c = dec2bin(nrstu.y);
+    cbin.d = dec2bin(nrstu.z);
 
     cm.w = dekrip(cbin.a);
     cm.x = dekrip(cbin.b);
