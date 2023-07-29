@@ -73,7 +73,7 @@ long encrypt(long m, long n)
     return c;
 }
 
-twolong euclidex(long p, long q)
+long2 euclidex(long p, long q)
 {
             long fx,fy,tempp,tempq;
             tempp = p;
@@ -97,13 +97,13 @@ twolong euclidex(long p, long q)
 	        }
 	        fx = lastx;
 	        fy = lasty;
-            twolong euxy = {fx,fy};
+            long2 euxy = {fx,fy};
             return euxy;
 }
 
-twolong quampq(long c, long p, long q)
+long2 quampq(long c, long p, long q)
 {
-    twolong mpq,pq;
+    long2 mpq,pq;
     pq.x = (p+1)/4;
     pq.y = (q+1)/4;
     mpz_t mp,mp1,mp2;
@@ -123,9 +123,9 @@ twolong quampq(long c, long p, long q)
     return mpq;
 }
 
-fourlong crt(twolong eu, twolong mpq, long p, long q,long n)
+long4 crt(long2 eu, long2 mpq, long p, long q,long n)
 {
-    fourlong cr;
+    long4 cr;
     cr.w = (eu.x*p* mpq.y + eu.y * q* mpq.x) % n ;
     cr.x = (-cr.w)%n;
     cr.y = (eu.y*q* mpq.x - eu.x* p* mpq.y ) % n ;
@@ -137,9 +137,9 @@ fourlong crt(twolong eu, twolong mpq, long p, long q,long n)
     return cr;
 }
 
-fourlong krstu(long k, fourlong rstu,long n)
+long4 krstu(long k, long4 rstu,long n)
 {
-    fourlong l;
+    long4 l;
     l.w = (k*n)+rstu.w;
     l.x = (k*n)+rstu.x;
     l.y = (k*n)+rstu.y;
@@ -187,9 +187,9 @@ long new_message(long m){
 int pdekripsi(long c,long p, long q, long k,long n)
 {
     long cma;
-    twolong eu,mpq;
-    fourlong rstu,nrstu,cm;
-    fourvec cbin;
+    long2 eu,mpq;
+    long4 rstu,nrstu,cm;
+    vector4 cbin;
 
     eu = euclidex(p,q);
     mpq = quampq(c,p,q);
@@ -220,9 +220,9 @@ int pdekripsi(long c,long p, long q, long k,long n)
 int main(){
     long p,q,n,k,c,cma;
     vector<int> mbin,mbin2;
-    twolong eu,mpq,test;
-    fourlong rstu,nrstu,cm;
-    fourvec cbin;
+    long2 eu,mpq,test;
+    long4 rstu,nrstu,cm;
+    vector4 cbin;
 
     p = 23;
     q = 11;

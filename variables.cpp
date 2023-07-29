@@ -1,29 +1,11 @@
 #include <vector>
 
-struct twolong
-{
-    long x;
-    long y;
+using long2 = struct {
+  long x, y
 };
-
-struct fourlong
-{
-    long w;
-    long x;
-    long y;
-    long z;
+using long4 = struct {
+  long w, x, y, z;
 };
-
-struct twovec
-{
-    std::vector<int> a;
-    std::vector<int> b;
-};
-
-struct fourvec
-{
-    std::vector<int> a;
-    std::vector<int> b;
-    std::vector<int> c;
-    std::vector<int> d;
+using vector4 = struct {
+  std::vector < int > a, b, c, d;
 };
